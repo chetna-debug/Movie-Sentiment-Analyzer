@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Movie Sentiment Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #f06292, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        textarea {
+            width: 90%;
+            height: 150px;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            transition: 0.3s ease;
+            resize: none;
+        }
+
+        textarea:focus {
+            border-color: #42a5f5;
+            outline: none;
+            box-shadow: 0 0 10px #42a5f580;
+        }
+
+        button {
+            background: linear-gradient(to right, #42a5f5, #7e57c2);
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .positive {
+            color: #43a047;
+        }
+
+        .negative {
+            color: #e53935;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        footer a {
+            color: #7e57c2;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Movie Review Sentiment</h1>
+        <form action="/predict" method="post">
+            <textarea name="review" placeholder="Write your movie review here..." required>{{ review }}</textarea><br>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {% if 'Negative' in prediction %}negative{% else %}positive{% endif %}">
+                Sentiment: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        chetana sudheer • AI intern • 
+        <a href="https://github.com/chetna-debug" target="_blank">github.com/chetna-debug</a>
+    </footer>
+</body>
+</html>
